@@ -55,11 +55,11 @@ const DEFAULT_PRODUCTS = [
 ];
 
 const DEFAULT_LEADERBOARD = [
-  { name: 'Alex Soda-Saver', cans: 245, points: 2450, co2: 20.8, rank: 1 },
-  { name: 'Sarah Green-Can', cans: 189, points: 1890, co2: 16.0, rank: 2 },
+  { name: 'Recycler #4092', cans: 245, points: 2450, co2: 20.8, rank: 1 },
+  { name: 'Recycler #9821', cans: 189, points: 1890, co2: 16.0, rank: 2 },
   { name: 'You (Eco-Champion)', cans: 0, points: 0, co2: 0.0, rank: 3, isUser: true },
-  { name: 'Michael Recycle', cans: 112, points: 1120, co2: 9.5, rank: 4 },
-  { name: 'Emma Planet-Lover', cans: 84, points: 840, co2: 7.1, rank: 5 }
+  { name: 'Recycler #1204', cans: 112, points: 1120, co2: 9.5, rank: 4 },
+  { name: 'Recycler #7731', cans: 84, points: 840, co2: 7.1, rank: 5 }
 ];
 
 const DEFAULT_COUPONS = [
@@ -90,6 +90,17 @@ export const Store = {
     if (saved) {
       try {
         this.state = JSON.parse(saved);
+        // Migrate leaderboard names to remove personal names if they exist
+        if (this.state.leaderboard) {
+          const anonymizedNames = ['Recycler #4092', 'Recycler #9821', 'Recycler #1204', 'Recycler #7731'];
+          let anonIdx = 0;
+          this.state.leaderboard = this.state.leaderboard.map(item => {
+            if (item.isUser) return item;
+            item.name = anonymizedNames[anonIdx] || `Recycler #${Math.floor(1000 + Math.random() * 9000)}`;
+            anonIdx++;
+            return item;
+          });
+        }
       } catch (e) {
         console.error('Error loading state from localStorage, resetting', e);
         this.resetState();

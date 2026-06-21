@@ -10,12 +10,12 @@
   /* Brand Palette */
   --pepsi-blue: #004B87;
   --pepsi-red: #C9002B;
-  --pepsi-dark: #070913;
-  --pepsi-dark-card: rgba(13, 18, 36, 0.65);
-  --pepsi-glass-bg: rgba(255, 255, 255, 0.03);
-  --pepsi-glass-border: rgba(255, 255, 255, 0.07);
+  --pepsi-dark: #05070f;
+  --pepsi-dark-card: rgba(8, 12, 28, 0.75);
+  --pepsi-glass-bg: rgba(255, 255, 255, 0.02);
+  --pepsi-glass-border: rgba(0, 240, 255, 0.08);
   --pepsi-text-primary: #FFFFFF;
-  --pepsi-text-secondary: #8E9BAE;
+  --pepsi-text-secondary: #8493a8;
   
   /* Neon Accents */
   --neon-blue: #00F0FF;
@@ -35,12 +35,12 @@
   --sidebar-width: 280px;
   --sidebar-collapsed-width: 80px;
   --header-height: 80px;
-  --border-radius-lg: 20px;
-  --border-radius-md: 12px;
-  --border-radius-sm: 8px;
-  --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  --glow-blue: 0 0 15px rgba(0, 240, 255, 0.35);
-  --glow-red: 0 0 15px rgba(255, 51, 102, 0.35);
+  --border-radius-lg: 24px;
+  --border-radius-md: 16px;
+  --border-radius-sm: 10px;
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --glow-blue: 0 0 20px rgba(0, 240, 255, 0.45);
+  --glow-red: 0 0 20px rgba(255, 51, 102, 0.45);
 }
 
 /* =========================================
@@ -59,26 +59,49 @@ body {
   overflow-x: hidden;
   line-height: 1.5;
   background-image: 
-    radial-gradient(circle at 10% 20%, rgba(0, 75, 135, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(199, 0, 43, 0.12) 0%, transparent 40%),
-    linear-gradient(to bottom, #070913, #020306);
+    radial-gradient(circle at 5% 15%, rgba(0, 75, 135, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 95% 85%, rgba(199, 0, 43, 0.16) 0%, transparent 45%),
+    linear-gradient(to bottom, #05070f, #010204);
   background-attachment: fixed;
+  position: relative;
+}
+
+/* Moving Tech-Grid Matrix Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.015) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center center;
+  z-index: -1;
+  pointer-events: none;
+  animation: bg-grid-move 25s linear infinite;
+}
+
+@keyframes bg-grid-move {
+  from { background-position: 0 0; }
+  to { background-position: 50px 50px; }
 }
 
 /* Scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
   background: var(--pepsi-dark);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 10px;
+  border: 2px solid var(--pepsi-dark);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--neon-blue);
+  box-shadow: var(--glow-blue);
 }
 
 /* Core Layout Shell */
@@ -1097,16 +1120,43 @@ body {
   align-items: center;
   padding: 24px;
   border-radius: var(--border-radius-lg);
-  background: var(--pepsi-dark-card);
+  background: linear-gradient(135deg, rgba(8, 12, 28, 0.6) 0%, rgba(13, 20, 43, 0.4) 100%);
   border: 1px solid var(--pepsi-glass-border);
   transition: var(--transition-smooth);
   position: relative;
+  overflow: hidden;
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+  opacity: 0;
+  transition: var(--transition-smooth);
+  z-index: 0;
+}
+
+.product-card:hover::before {
+  opacity: 1;
 }
 
 .product-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(0,240,255,0.25);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(0, 240, 255, 0.35);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.6),
+    0 0 25px rgba(0, 240, 255, 0.1),
+    inset 0 0 10px rgba(0, 240, 255, 0.05);
+}
+
+.product-info-panel, .product-image-container {
+  position: relative;
+  z-index: 1;
 }
 
 .product-image-container {

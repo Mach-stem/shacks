@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pepsi Eco-Delivery & Smart Recycling</title>
+  <meta name="description" content="Simulate real-time smart deliveries and scan Pepsi cans to unlock rewards, track carbon savings, and view rider routing optimizations.">
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Iconography -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js for high-fidelity dashboards -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- App Container -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <!-- Custom Pepsi-like Vector Globe SVG -->
+          <svg viewBox="0 0 100 100" class="logo-svg">
+            <circle cx="50" cy="50" r="48" fill="#fff" />
+            <!-- Red Upper Wave -->
+            <path d="M 50,5 A 45,45 0 0,1 93.5,40 Q 70,30 50,45 Q 30,60 6.5,40 A 45,45 0 0,1 50,5" fill="#E31B23" />
+            <!-- Blue Lower Wave -->
+            <path d="M 50,95 A 45,45 0 0,1 6.5,60 Q 30,70 50,55 Q 70,40 93.5,60 A 45,45 0 0,1 50,95" fill="#0056B3" />
+          </svg>
+          <span class="brand-text">PEPSI<span class="brand-sub">SMART</span></span>
+        </div>
+        <button class="btn-toggle-sidebar" id="toggle-sidebar-mobile" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="#home" class="nav-link active" data-view="home" id="nav-home">
+              <i class="fa-solid fa-house-chimney"></i>
+              <span>Home Hub</span>
+            </a>
+          </li>
+          <li>
+            <a href="#catalog" class="nav-link" data-view="catalog" id="nav-catalog">
+              <i class="fa-solid fa-whiskey-glass"></i>
+              <span>Pepsi Catalog</span>
+            </a>
+          </li>
+          <li>
+            <a href="#tracking" class="nav-link" data-view="tracking" id="nav-tracking">
+              <i class="fa-solid fa-map-location-dot"></i>
+              <span>Track Delivery</span>
+              <span class="nav-badge hidden" id="tracking-active-badge">Live</span>
+            </a>
+          </li>
+          <li>
+            <a href="#recycling" class="nav-link" data-view="recycling" id="nav-recycling">
+              <i class="fa-solid fa-recycle"></i>
+              <span>Recycling Rewards</span>
+            </a>
+          </li>
+          <li>
+            <a href="#rider" class="nav-link" data-view="rider" id="nav-rider">
+              <i class="fa-solid fa-motorcycle"></i>
+              <span>Rider Console</span>
+              <span class="nav-badge rider-badge hidden" id="rider-job-badge">!</span>
+            </a>
+          </li>
+          <li>
+            <a href="#analytics" class="nav-link" data-view="analytics" id="nav-analytics">
+              <i class="fa-solid fa-chart-line"></i>
+              <span>Eco Analytics</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-pill">
+          <div class="user-avatar">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <div class="user-info">
+            <span class="user-name">Eco Champ</span>
+            <span class="user-rank" id="sidebar-rank">Rank #3</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      
+      <!-- Topbar Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <button class="btn-toggle-sidebar-desktop" id="toggle-sidebar-desktop" aria-label="Toggle Sidebar Menu">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <h1 class="current-view-title" id="page-title">Home Hub</h1>
+        </div>
+        
+        <div class="header-right">
+          <div class="stat-pill points-pill">
+            <i class="fa-solid fa-star"></i>
+            <span class="stat-value" id="header-points">0</span>
+            <span class="stat-label">Points</span>
+          </div>
+          
+          <div class="stat-pill co2-pill">
+            <i class="fa-solid fa-cloud-sun"></i>
+            <span class="stat-value" id="header-co2">0.00</span>
+            <span class="stat-label">kg CO₂</span>
+          </div>
+
+          <button class="btn-cart" id="btn-open-cart" aria-label="Open Cart">
+            <i class="fa-solid fa-shopping-bag"></i>
+            <span class="cart-badge" id="cart-count">0</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- View Containers -->
+      <div class="view-content">
+
+        <!-- 1. HOME VIEW -->
+        <section id="view-home" class="view-section active">
+          <!-- Dynamic rendering via home.js -->
+        </section>
+
+        <!-- 2. CATALOG VIEW -->
+        <section id="view-catalog" class="view-section hidden">
+          <!-- Dynamic rendering via catalog.js -->
+        </section>
+
+        <!-- 3. TRACKING VIEW -->
+        <section id="view-tracking" class="view-section hidden">
+          <!-- Dynamic rendering via tracker.js -->
+        </section>
+
+        <!-- 4. RECYCLING VIEW -->
+        <section id="view-recycling" class="view-section hidden">
+          <!-- Dynamic rendering via recycling.js -->
+        </section>
+
+        <!-- 5. RIDER VIEW -->
+        <section id="view-rider" class="view-section hidden">
+          <!-- Dynamic rendering via rider.js -->
+        </section>
+
+        <!-- 6. ANALYTICS VIEW -->
+        <section id="view-analytics" class="view-section hidden">
+          <!-- Dynamic rendering via analytics.js -->
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Cart / Checkout Sliding Drawer -->
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="drawer-overlay" id="cart-overlay"></div>
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <h2>Your Cart</h2>
+        <button class="btn-close-drawer" id="btn-close-cart" aria-label="Close Cart">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="drawer-body">
+        <div class="cart-items-container" id="cart-items">
+          <!-- Cart items loaded here -->
+        </div>
+
+        <div class="checkout-form">
+          <div class="form-group">
+            <label for="checkout-address">Delivery Address</label>
+            <input type="text" id="checkout-address" placeholder="Enter delivery location" value="123 Eco Avenue, Suite 404">
+          </div>
+          
+          <div class="form-group">
+            <label for="checkout-coupon">Apply Reward Coupon</label>
+            <select id="checkout-coupon">
+              <option value="">No Coupon Selected</option>
+              <!-- Unlocked coupons will populate here -->
+            </select>
+          </div>
+        </div>
+
+        <div class="price-breakdown">
+          <div class="price-row">
+            <span>Subtotal</span>
+            <span id="checkout-subtotal">$0.00</span>
+          </div>
+          <div class="price-row">
+            <span>Delivery Fee</span>
+            <span id="checkout-delivery">$0.00</span>
+            <span class="delivery-credit-tag" id="delivery-credit-count">(1 Credit Available)</span>
+          </div>
+          <div class="price-row discount-row hidden" id="discount-row">
+            <span>Discount</span>
+            <span id="checkout-discount">-$0.00</span>
+          </div>
+          <hr class="price-divider">
+          <div class="price-row total-row">
+            <span>Total</span>
+            <span id="checkout-total">$0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <button class="btn-checkout-submit" id="btn-submit-order">
+          <span>Place Eco-Delivery Order</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Application Initialization Script -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

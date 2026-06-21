@@ -1828,31 +1828,10 @@ body::before {
    RESPONSIVE MEDIA QUERIES
    ========================================= */
 @media (max-width: 1024px) {
-  :root {
-    --sidebar-width: 80px;
+  .app-header {
+    margin: 20px;
   }
-  
-  .brand-text, .user-info {
-    display: none;
-  }
-  
-  .app-sidebar .logo-svg {
-    margin: 0 auto;
-  }
-  
-  .nav-link span, .nav-badge {
-    display: none;
-  }
-  
-  .nav-link {
-    justify-content: center;
-    padding: 14px 0;
-  }
-  
-  .app-main {
-    margin-left: 80px;
-  }
-  
+
   .tracking-container {
     grid-template-columns: 1fr;
   }
@@ -1868,27 +1847,7 @@ body::before {
 
 @media (max-width: 768px) {
   body {
-    padding-bottom: 60px; /* space for mobile nav if needed */
-  }
-
-  .app-sidebar {
-    width: 0;
-    overflow: hidden;
-  }
-
-  .app-sidebar.mobile-open {
-    width: 240px;
-  }
-
-  .app-sidebar.mobile-open .brand-text,
-  .app-sidebar.mobile-open .nav-link span,
-  .app-sidebar.mobile-open .user-info {
-    display: flex;
-  }
-  
-  .app-sidebar.mobile-open .nav-link {
-    justify-content: flex-start;
-    padding: 14px 16px;
+    padding-bottom: 90px;
   }
 
   .app-main {
@@ -1896,11 +1855,44 @@ body::before {
   }
 
   .app-header {
+    margin: 10px;
     padding: 0 16px;
+    height: 70px;
+    top: 10px;
+    border-radius: 25px;
+  }
+
+  .brand-text {
+    font-size: 16px;
+  }
+
+  .brand-logo .logo-svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .header-divider {
+    display: none;
+  }
+
+  .current-view-title {
+    display: none; /* Hide view title on mobile to save space */
+  }
+
+  .stat-pill {
+    padding: 6px 12px;
+  }
+
+  .stat-label {
+    display: none; /* Hide labels on mobile header stats */
+  }
+
+  .user-profile-info {
+    display: none; /* Hide rank text on mobile */
   }
 
   .view-content {
-    padding: 20px;
+    padding: 16px;
   }
 
   .grid-2, .grid-3, .grid-4 {
@@ -1942,7 +1934,35 @@ body::before {
     grid-template-columns: 1fr;
   }
 
-  .btn-toggle-sidebar-desktop {
-    display: none;
+  /* Dock adjustments for Mobile */
+  .floating-dock {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+  }
+
+  .dock-container {
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    justify-content: space-around;
+    padding: 8px 12px;
+    gap: 0;
+  }
+
+  .dock-item {
+    width: 50px;
+    height: 50px;
+  }
+
+  .dock-item i {
+    font-size: 16px;
+  }
+
+  .dock-label {
+    font-size: 8px;
   }
 }

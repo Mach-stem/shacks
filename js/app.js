@@ -23,9 +23,6 @@ export const App = {
     // Initialize State Store
     Store.init();
 
-    // Setup Sidebar Toggles
-    this.setupSidebar();
-
     // Setup Cart Drawer Actions
     this.setupCart();
 
@@ -42,35 +39,6 @@ export const App = {
 
     // Initial Toast greeting
     this.showToast('Welcome Back!', 'Pepsi Smart Delivery System is online.', 'info');
-  },
-
-  // --- SIDEBAR HANDLERS ---
-  setupSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const toggleDesktop = document.getElementById('toggle-sidebar-desktop');
-    const toggleMobile = document.getElementById('toggle-sidebar-mobile');
-
-    toggleDesktop.addEventListener('click', () => {
-      sidebar.classList.toggle('collapsed');
-      const icon = toggleDesktop.querySelector('i');
-      if (sidebar.classList.contains('collapsed')) {
-        icon.className = 'fa-solid fa-chevron-right';
-      } else {
-        icon.className = 'fa-solid fa-chevron-left';
-      }
-    });
-
-    toggleMobile.addEventListener('click', (e) => {
-      e.stopPropagation();
-      sidebar.classList.toggle('mobile-open');
-    });
-
-    // Close mobile sidebar when clicking main content
-    document.addEventListener('click', (e) => {
-      if (window.innerWidth <= 768 && !sidebar.contains(e.target) && sidebar.classList.contains('mobile-open')) {
-        sidebar.classList.remove('mobile-open');
-      }
-    });
   },
 
   // --- HASH ROUTING ---
@@ -93,7 +61,7 @@ export const App = {
     if (currentViewName === viewName) return;
 
     // Remove active state from current navigation links
-    document.querySelectorAll('.nav-link').forEach(link => {
+    document.querySelectorAll('.dock-item').forEach(link => {
       link.classList.remove('active');
       if (link.getAttribute('data-view') === viewName) {
         link.classList.add('active');
@@ -364,9 +332,10 @@ export const App = {
     document.getElementById('header-points').textContent = state.userStats.points;
     document.getElementById('header-co2').textContent = state.userStats.carbonSaved.toFixed(2);
     
-    // Sidebar User Stats
+    // Header User Stats
     const userRank = state.leaderboard.find(l => l.isUser)?.rank || 3;
-    document.getElementById('sidebar-rank').textContent = `Rank #${userRank}`;
+    const headerRank = document.getElementById('header-rank');
+    if (headerRank) headerRank.textContent = `Rank #${userRank}`;
 
     // Cart Badge count
     const cartCount = state.cart.reduce((acc, item) => acc + item.quantity, 0);

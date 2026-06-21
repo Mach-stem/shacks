@@ -24,90 +24,24 @@
   <!-- App Container -->
   <div class="app-container">
     
-    <!-- Sidebar Navigation -->
-    <aside class="app-sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <div class="brand-logo">
-          <!-- Custom Pepsi-like Vector Globe SVG -->
-          <svg viewBox="0 0 100 100" class="logo-svg">
-            <circle cx="50" cy="50" r="48" fill="#fff" />
-            <!-- Red Upper Wave -->
-            <path d="M 50,5 A 45,45 0 0,1 93.5,40 Q 70,30 50,45 Q 30,60 6.5,40 A 45,45 0 0,1 50,5" fill="#E31B23" />
-            <!-- Blue Lower Wave -->
-            <path d="M 50,95 A 45,45 0 0,1 6.5,60 Q 30,70 50,55 Q 70,40 93.5,60 A 45,45 0 0,1 50,95" fill="#0056B3" />
-          </svg>
-          <span class="brand-text">PEPSI<span class="brand-sub">SMART</span></span>
-        </div>
-        <button class="btn-toggle-sidebar" id="toggle-sidebar-mobile" aria-label="Toggle Navigation">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
-
-      <nav class="sidebar-nav">
-        <ul>
-          <li>
-            <a href="#home" class="nav-link active" data-view="home" id="nav-home">
-              <i class="fa-solid fa-house-chimney"></i>
-              <span>Home Hub</span>
-            </a>
-          </li>
-          <li>
-            <a href="#catalog" class="nav-link" data-view="catalog" id="nav-catalog">
-              <i class="fa-solid fa-whiskey-glass"></i>
-              <span>Pepsi Catalog</span>
-            </a>
-          </li>
-          <li>
-            <a href="#tracking" class="nav-link" data-view="tracking" id="nav-tracking">
-              <i class="fa-solid fa-map-location-dot"></i>
-              <span>Track Delivery</span>
-              <span class="nav-badge hidden" id="tracking-active-badge">Live</span>
-            </a>
-          </li>
-          <li>
-            <a href="#recycling" class="nav-link" data-view="recycling" id="nav-recycling">
-              <i class="fa-solid fa-recycle"></i>
-              <span>Recycling Rewards</span>
-            </a>
-          </li>
-          <li>
-            <a href="#rider" class="nav-link" data-view="rider" id="nav-rider">
-              <i class="fa-solid fa-motorcycle"></i>
-              <span>Rider Console</span>
-              <span class="nav-badge rider-badge hidden" id="rider-job-badge">!</span>
-            </a>
-          </li>
-          <li>
-            <a href="#analytics" class="nav-link" data-view="analytics" id="nav-analytics">
-              <i class="fa-solid fa-chart-line"></i>
-              <span>Eco Analytics</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="user-pill">
-          <div class="user-avatar">
-            <i class="fa-solid fa-leaf"></i>
-          </div>
-          <div class="user-info">
-            <span class="user-name">Eco Champ</span>
-            <span class="user-rank" id="sidebar-rank">Rank #3</span>
-          </div>
-        </div>
-      </div>
-    </aside>
-
     <!-- Main Content Area -->
     <main class="app-main">
       
       <!-- Topbar Header -->
       <header class="app-header">
         <div class="header-left">
-          <button class="btn-toggle-sidebar-desktop" id="toggle-sidebar-desktop" aria-label="Toggle Sidebar Menu">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
+          <div class="brand-logo">
+            <!-- Custom Pepsi-like Vector Globe SVG -->
+            <svg viewBox="0 0 100 100" class="logo-svg">
+              <circle cx="50" cy="50" r="48" fill="#fff" />
+              <!-- Red Upper Wave -->
+              <path d="M 50,5 A 45,45 0 0,1 93.5,40 Q 70,30 50,45 Q 30,60 6.5,40 A 45,45 0 0,1 50,5" fill="#E31B23" />
+              <!-- Blue Lower Wave -->
+              <path d="M 50,95 A 45,45 0 0,1 6.5,60 Q 30,70 50,55 Q 70,40 93.5,60 A 45,45 0 0,1 50,95" fill="#0056B3" />
+            </svg>
+            <span class="brand-text">PEPSI<span class="brand-sub">SMART</span></span>
+          </div>
+          <span class="header-divider">/</span>
           <h1 class="current-view-title" id="page-title">Home Hub</h1>
         </div>
         
@@ -128,6 +62,15 @@
             <i class="fa-solid fa-shopping-bag"></i>
             <span class="cart-badge" id="cart-count">0</span>
           </button>
+
+          <div class="user-profile-header">
+            <div class="user-avatar-sm">
+              <i class="fa-solid fa-leaf"></i>
+            </div>
+            <div class="user-profile-info">
+              <span class="user-profile-rank" id="header-rank">Rank #3</span>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -229,6 +172,38 @@
       </div>
     </div>
   </div>
+
+  <!-- Floating Glass Command Dock -->
+  <nav class="floating-dock" id="command-dock">
+    <div class="dock-container">
+      <a href="#home" class="dock-item active" data-view="home" title="Home Hub">
+        <i class="fa-solid fa-house-chimney"></i>
+        <span class="dock-label">Home</span>
+      </a>
+      <a href="#catalog" class="dock-item" data-view="catalog" title="Pepsi Catalog">
+        <i class="fa-solid fa-whiskey-glass"></i>
+        <span class="dock-label">Catalog</span>
+      </a>
+      <a href="#tracking" class="dock-item" data-view="tracking" title="Track Delivery">
+        <i class="fa-solid fa-map-location-dot"></i>
+        <span class="dock-badge hidden" id="tracking-active-badge">Live</span>
+        <span class="dock-label">Track</span>
+      </a>
+      <a href="#recycling" class="dock-item" data-view="recycling" title="Recycling Rewards">
+        <i class="fa-solid fa-recycle"></i>
+        <span class="dock-label">Recycle</span>
+      </a>
+      <a href="#rider" class="dock-item" data-view="rider" title="Rider Console">
+        <i class="fa-solid fa-motorcycle"></i>
+        <span class="dock-badge rider-badge hidden" id="rider-job-badge">!</span>
+        <span class="dock-label">Rider</span>
+      </a>
+      <a href="#analytics" class="dock-item" data-view="analytics" title="Eco Analytics">
+        <i class="fa-solid fa-chart-line"></i>
+        <span class="dock-label">Analytics</span>
+      </a>
+    </div>
+  </nav>
 
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toast-container"></div>
